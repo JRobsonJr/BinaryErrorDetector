@@ -1,5 +1,10 @@
 module Util where
 
+countOnes :: [Char] -> Int
+countOnes [] = 0
+countOnes ('0':tail) = countOnes tail
+countOnes ('1':tail) = 1 + countOnes tail
+
 chunksOf :: Int -> [Char] -> [[Char]]
 chunksOf size list = chunksOf' size list 
 
