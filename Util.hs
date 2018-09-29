@@ -8,11 +8,12 @@ chunksOf' _ [] = []
 chunksOf' size list = (take size list) : (chunksOf' size $ drop size list)
 
 getBitsToBeChecked :: [Char] -> Int -> [Char]
-getBitsToBeChecked code interval = oddIndexItems $ concatenateLists $ chunksOf interval code
+getBitsToBeChecked code interval = evenIndexItems $ concatenateLists $ chunksOf interval code
 
-oddIndexItems :: [Char] -> [Char]
-oddIndexItems [] = []
-oddIndexItems (e1:e2:es) = [e1] ++ oddIndexItems es
+evenIndexItems :: [Char] -> [Char]
+evenIndexItems [] = []
+evenIndexItems [e] = [e] 
+evenIndexItems (e0:e1:es) = [e0] ++ evenIndexItems es
 
 concatenateLists :: [[Char]] -> [Char]
 concatenateLists [] = []
