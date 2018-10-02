@@ -2,6 +2,7 @@ module Util where
 
 countOnes :: [Char] -> Int
 countOnes [] = 0
+countOnes ('*':tail) = countOnes tail
 countOnes ('0':tail) = countOnes tail
 countOnes ('1':tail) = 1 + countOnes tail
 
@@ -12,10 +13,7 @@ chunksOf' :: Int -> [Char] -> [[Char]]
 chunksOf' _ [] = []
 chunksOf' size list = (take size list) : (chunksOf' size $ drop size list)
 
-getBitsToBeChecked :: [Char] -> Int -> [Char]
-getBitsToBeChecked code interval = evenIndexItems $ concatenateLists $ chunksOf interval code
-
-evenIndexItems :: [Char] -> [Char]
+evenIndexItems :: [[Char]] -> [[Char]]
 evenIndexItems [] = []
 evenIndexItems [e] = [e] 
 evenIndexItems (e0:e1:es) = [e0] ++ evenIndexItems es
@@ -38,3 +36,7 @@ floorToPowerOfTwo' number exponent
     | (2 ^ exponent == number) = number
     | (2 ^ exponent > number) = 2 ^ (exponent - 1)
     | otherwise = floorToPowerOfTwo' number $ exponent + 1
+
+replaceNthElement :: Int -> Char -> [Char] -> [Char]
+replaceNthElement index element code = firstPart ++ [element] ++ drop 1 secondPart
+    where (firstPart, secondPart) = splitAt index code
