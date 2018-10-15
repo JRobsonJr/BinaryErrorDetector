@@ -42,7 +42,7 @@ invertBit '1' = '0'
 -- It uses the current exponent to determine the position of the parity bit and
 -- which bits should be checked.
 getBitsToBeChecked :: [Char] -> Int -> [Char]
-getBitsToBeChecked code exponent = concatenateLists $ evenIndexItems $ chunks
+getBitsToBeChecked code exponent = concat $ evenIndexItems $ chunks
     where chunks = chunksOf interval (drop start code)
           start = interval - 1
           interval = 2 ^ exponent
