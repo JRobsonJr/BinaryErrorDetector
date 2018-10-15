@@ -1,17 +1,11 @@
 module Util where
 
 countOnes :: [Char] -> Int
-countOnes [] = 0
-countOnes ('*':tail) = countOnes tail
-countOnes ('0':tail) = countOnes tail
-countOnes ('1':tail) = 1 + countOnes tail
+countOnes list = length $ filter (== '1') list
 
 chunksOf :: Int -> [Char] -> [[Char]]
-chunksOf size list = chunksOf' size list 
-
-chunksOf' :: Int -> [Char] -> [[Char]]
-chunksOf' _ [] = []
-chunksOf' size list = (take size list) : (chunksOf' size $ drop size list)
+chunksOf _ [] = []
+chunksOf size list = (take size list) : (chunksOf size $ drop size list) 
 
 evenIndexItems :: [[Char]] -> [[Char]]
 evenIndexItems [] = []
@@ -19,8 +13,7 @@ evenIndexItems [e] = [e]
 evenIndexItems (e0:e1:es) = [e0] ++ evenIndexItems es
 
 concatenateLists :: [[Char]] -> [Char]
-concatenateLists [] = []
-concatenateLists (e:es) = e ++ concatenateLists es
+concatenateLists lists = concat lists
 
 powersOfTwo :: Float -> [Int]
 powersOfTwo number = [ 2 ^ x | x <- [1 .. floor $ logBase 2 number] ]
